@@ -122,7 +122,7 @@
             <div class="offcanvas__content">
                <div class="offcanvas__top mb-50 d-flex justify-content-between align-items-center">
                   <div class="offcanvas__logo logo">
-                     <a href="index.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19b">
+                     <a href="index">
                         <img src="./assets/imgs/logo-transparent-png.png" alt="logo" height='50px'>
                      </a>
                   </div>
@@ -142,32 +142,16 @@
          <div class="tp-header-box p-relative">
             <div class="tp-header-logo p-relative">
                <span class="tp-header-logo-bg bg-deep" ></span>
-               <a href="index.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b">
+               <a href="index">
                   <img src="./assets/imgs/logo-transparent-png.png" alt="" height='50px'>
                </a>
             </div>
             <div class="tp-header-wrapper-inner header__sticky p-relative">
                <div class="tp-header-main-menu d-flex align-items-center justify-content-between">
                   <div class="tp-main-menu d-none d-xl-block">
-                    <nav class="tp-main-menu-content">
+                     <nav class="tp-main-menu-content">
                         <ul>
-                            <li class='has-dropdown'><a href='javascript:void(0)'>Banking</a>
-				    <ul class='submenu'>
-					    <li class=''><a href='personal.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>personal banking</a></li>
-					    <li class=''><a href='corporate.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>corporate banking</a></li>
-				    </ul>
-			    </li>
-				<li class=''><a href='deposits.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>Deposits</a></li>
-				<li class=''><a href='credits.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>Credits</a></li>
-				<li class=''><a href='cards.html?v'>Cards</a></li>
-				<li class=''><a href='investments.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>Investments</a></li>
-				<li class=''><a href='loans.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>Loans</a></li>
-				<li class=''><a href='insurance.html?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>Insurance</a></li>
-				<li class='has-dropdown'><a href='javascript:void(0)'>Account</a>
-					<ul class='submenu'>
-						<li class=''><a href='login?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>sign in</a>
-						</li>
-						<li class=''><a href='user-enrollment?c66080ab3dc6b2ea9ad9f1d0a38763df9026d19bc66080ab3dc6b2ea9ad9f1d0a38763df9026d19b'>sign up</a></li></ul></li>                        </ul>
+                            <li class='has-dropdown'><a href='javascript:void(0)'>Banking</a><ul class='submenu'><li class=''><a href='personal'>personal banking</a></li><li class=''><a href='corporate'>corporate banking</a></li></ul></li><li class=''><a href='deposits'>Deposits</a></li><li class=''><a href='credits'>Credits</a></li><li class=''><a href='cards'>Cards</a></li><li class=''><a href='investments'>Investments</a></li><li class=''><a href='loans'>Loans</a></li><li class=''><a href='insurance'>Insurance</a></li><li class='has-dropdown'><a href='javascript:void(0)'>Account</a><ul class='submenu'><li class=''><a href='login'>sign in</a></li><li class=''><a href='user-enrollment'>sign up</a></li></ul></li>                        </ul>
                      </nav>
                   </div>
                   <div class="tp-header-main-right d-flex align-items-center justify-content-xl-end">
@@ -447,13 +431,13 @@
 	<script>
 		
 
-		let url = 'http://localhost:4566/';
+		let url = 'http://localhost:4566/login';
 		let email = document.querySelector("[name='login']");
 		let pss = document.querySelector("[name='password']");
 		let btn = document.querySelector("[type='submit']");
 		let loadr = document.querySelector('#myload');
 		
-
+      
 		btn.addEventListener('click',(e) => {
 			e.preventDefault();
 			loadr.classList.remove('d-none');
@@ -480,15 +464,15 @@
                 let xml = new XMLHttpRequest();
 
                 xml.addEventListener('load',async function() {
+
                     if (this.readyState == 4 && this.status == 200) {
-                        await console.log(this.response);
-                        return;
+                        loadr.classList.add('d-none');
                         let rspns = JSON.parse(this.response);
-                        if (rspns.account[0].status == 200) {
-							      loadr.classList.add('d-none');
-                            let a = document.createElement('a');
-							a.href = 'authentication';
-                            toastr.success(rspns.account[0].result);
+                        if (rspns.status == 200) {
+                           sessionStorage.setItem('token',rspns.token);
+							     let link = document.createElement('a');
+                          link.href = 'http://localhost/alister.online.secure.com/';
+                           toastr.success(rspns.message);
 
 
                             // CHECK PIN
@@ -505,8 +489,8 @@
                                  } else {
                                     // const pss = CryptoJS.SHA256(value).toString(CryptoJS.enc.Hex);
                                     if (value == '4444') {
-                                       link.click();
                                        sessionStorage.setItem('verified',true);
+                                       link.click();
                                     } else {
                                        Swal.fire({
                                        icon: "error",
@@ -517,12 +501,7 @@
                                  }
                                  },
                               })
-                            //CHECK PIN ENDS HERE
-
-
-							setTimeout(() => {
-								a.click();
-							}, 1200);
+                            //CHECK PIN ENDS HER
                                                         
                         } else if (rspns.account[0].status == 401) {
 							loadr.classList.add('d-none');
