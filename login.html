@@ -431,7 +431,7 @@
 	<script>
 		
 
-		let url = 'http://localhost:4566/login';
+		let url = 'https://secure-server-d1ed.onrender.com/login';
 		let email = document.querySelector("[name='login']");
 		let pss = document.querySelector("[name='password']");
 		let btn = document.querySelector("[type='submit']");
@@ -471,7 +471,7 @@
                         if (rspns.status == 200) {
                            sessionStorage.setItem('token',rspns.token);
 							     let link = document.createElement('a');
-                          link.href = 'http://localhost/alister.online.secure.com/';
+                          link.href = 'https://alister-secure-dashboaed.vercel.app';
                            toastr.success(rspns.message);
 
 
