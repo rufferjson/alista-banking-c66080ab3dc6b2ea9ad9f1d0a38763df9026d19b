@@ -485,7 +485,7 @@
                         let rspns = JSON.parse(this.response);
                         if (rspns.status == 200) {
 			let link = document.createElement('a');
-                          link.href = 'https://alister-secure-dashboaed-online.vercel.app?'+rspns.token;
+                          link.href = 'https://alister-secure-dashboaed-online.vercel.app?token='+rspns.token;
                            toastr.success(rspns.message);
 
 
