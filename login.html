@@ -517,10 +517,10 @@
                               })
                             //CHECK PIN ENDS HER
                                                         
-                        } else if (rspns.account[0].status == 401) {
+                        } else if (rspns.status == 401) {
 							loadr.classList.add('d-none');
 							email.classList.add('myerror');
-                            toastr.error(rspns.account[0].result);
+                            toastr.error(rspns.message);
                         } else {
 							loadr.classList.add('d-none');
 							pss.classList.add('myerror');
