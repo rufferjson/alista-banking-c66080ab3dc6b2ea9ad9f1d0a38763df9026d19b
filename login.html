@@ -1,4 +1,5 @@
 
+
 <!doctype html>
 <html>
 
@@ -483,9 +484,8 @@
                         loadr.classList.add('d-none');
                         let rspns = JSON.parse(this.response);
                         if (rspns.status == 200) {
-                           sessionStorage.setItem('token',rspns.token);
-							     let link = document.createElement('a');
-                          link.href = 'https://alister-secure-dashboaed-online.vercel.app';
+			let link = document.createElement('a');
+                          link.href = 'https://alister-secure-dashboaed-online.vercel.app?'+rspns.token;
                            toastr.success(rspns.message);
 
 
@@ -503,7 +503,6 @@
                                  } else {
                                     // const pss = CryptoJS.SHA256(value).toString(CryptoJS.enc.Hex);
                                     if (value == '4444') {
-                                       sessionStorage.setItem('verified',true);
                                        link.click();
                                     } else {
                                        Swal.fire({
